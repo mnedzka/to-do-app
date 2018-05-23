@@ -21,3 +21,27 @@ document.getElementById("add").addEventListener("click", () => {
     addItem(value);
   }
 });
+
+document.getElementById("item").addEventListener("keydown", function(e) {
+  var value = this.value;
+  if ((e.code === "Enter" || e.code === "NumpadEnter") && value) {
+    addItem(value);
+  }
+});
+
+function addItem(value) {
+  addItemToDOM(value);
+  document.getElementById("item").value = "";
+
+  data.todo.push(value);
+  dataObjectUpdated();
+}
+
+function renderTodoList() {
+  if (!data.todo.length && !data.completed.length) return;
+
+  for (var i = 0; i < data.todo.length; i++) {
+    var value = data.todo[i];
+    addItemToDOM(value);
+  }
+}
